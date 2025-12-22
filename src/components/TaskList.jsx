@@ -15,14 +15,22 @@ const TaskList= ({ todos, setTodos, filter, setFilter }) => {
       ? {...todo, completed: !todo.completed } : todo ))
   }
 
-  const tasksRemaining = todos.filter(todo => todo.completed === false).length
+  function clearCompleted() {
+    setTodos(todos.filter(todo => !todo.completed))
+  }
 
-  console.log(filter);
+  const tasksRemaining = todos.filter(todo => todo.completed === false).length
 
   return (
     <>
-    <ul className='text-2xl m-2'>
-      {todos.map(todo => (
+    {
+      todos.length === 0 ? <p className='flex justify-center items-center mt-10 mb-6 mr-8 ml-8 text-xl p-4 border-gray-600 bg-gray-700 border rounded-lg text-gray-400'>No Tasks!</p> : 
+      <ul className='text-2xl m-2'>
+      {todos.filter(todo => 
+      filter === "all" ? true : 
+      filter === "active" ? 
+      !todo.completed : todo.completed).map(todo => 
+        (
         <div key={todo.id} className='flex flex-row justify-center items-center'>
           <li className={`flex border-1 border-gray-600 bg-gray-700 m-2 text-lg text-white w-[300px] h-auto py-2 px-4 rounded-lg break-words overflow-hidden ${todo.completed ? 'opacity-50' : ''}`}>
             <span className='break-all'>
@@ -43,8 +51,11 @@ const TaskList= ({ todos, setTodos, filter, setFilter }) => {
         </div>
       ))}
     </ul>
-    <div className='mt-4 flex justify-items-start border-t-2 pt-2 border-gray-600'>
+    }
+    
+    <div className='mt-4 flex justify-items-start border-t-2 pt-2 border-gray-600 justify-between'>
       <span className='text-gray-500 text-s'>Tasks remaining: {tasksRemaining}</span>
+      <button onClick={() => clearCompleted()} className='text-gray-500 text-s hover:cursor-pointer hover:underline '>Clear Completed</button>
     </div>
     </>
   )

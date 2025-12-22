@@ -23,6 +23,11 @@ const TaskInput = ({ todos, setTodos}) => {
         <input 
         value = {inputValue}
         onChange = {(e) => setInputValue(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            submitTask(inputValue);
+          }
+        }}
         className='bg-gray-700 rounded-lg text-lg px-4 py-3 m-2 w-[300px] border-1 border-gray-600 text-gray-300 placeholder:text-gray-400' type="text" placeholder='Add new task'/>
 
         <button onClick={() => {submitTask(inputValue)}} 
