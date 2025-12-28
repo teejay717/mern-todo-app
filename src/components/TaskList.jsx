@@ -51,7 +51,7 @@ const TaskList= ({ todos, setTodos, filter, setFilter }) => {
       !todo.completed : todo.completed).map(todo => 
         (
         <div key={todo.id} className='flex flex-row justify-center items-center'>
-          <li className={`flex border-1 border-gray-600 bg-gray-700 m-2 text-lg text-white w-[300px] h-auto py-2 px-4 rounded-lg break-words overflow-hidden ${todo.completed ? 'opacity-50' : ''}`}>
+          <li className={`flex border-1 m-2 text-lg text-white w-[300px] h-auto py-2 px-4 rounded-lg break-words overflow-hidden ${todo.completed ? 'opacity-50' : ''} ${editingId === todo.id ? 'border-gray-300 bg-gray-600' : 'border-gray-600 bg-gray-700'}`}>
             <input
               type="checkbox"
               checked = {todo.completed} 
@@ -60,6 +60,7 @@ const TaskList= ({ todos, setTodos, filter, setFilter }) => {
               />
             <div className='flex justify-between items-center'>
               <textarea 
+              autoFocus
                 className='break-all w-48 bg-transparent resize-none overflow-hidden'
                 disabled={editingId !== todo.id}
                 onChange={(e) => {
@@ -81,7 +82,7 @@ const TaskList= ({ todos, setTodos, filter, setFilter }) => {
             deleteTask(todo.id)
           }
           className='bg-blue-600 px-4 py-2 w-auto h-auto rounded-lg text-center font-bold text-white text-lg cursor-pointer border-1 border-blue-500'><FontAwesomeIcon icon={faTrash} /></button>
-        </div>
+        </div>  
       ))}
     </ul>
     }
