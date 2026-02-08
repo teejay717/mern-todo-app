@@ -5,6 +5,7 @@ A clean, modern full-stack to-do list application built with React, Express, and
 ![React](https://img.shields.io/badge/React-19.2.0-61DAFB?logo=react)
 ![Vite](https://img.shields.io/badge/Vite-7.2.4-646CFF?logo=vite)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-4.1.18-38B2AC?logo=tailwind-css)
+![Node.js](https://img.shields.io/badge/Node.js-18+-339933?logo=node.js&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-000000?logo=express&logoColor=white)
 
@@ -82,6 +83,7 @@ A clean, modern full-stack to-do list application built with React, Express, and
 - **[Vite](https://vitejs.dev/)** - Build tool and dev server
 - **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first CSS framework
 - **[Font Awesome](https://fontawesome.com/)** - Icons
+- **[Node.js](https://nodejs.org/)** - JavaScript runtime
 - **[Express](https://expressjs.com/)** - Backend framework
 - **[MongoDB](https://www.mongodb.com/)** - NoSQL database
 - **[Mongoose](https://mongoosejs.com/)** - MongoDB object modeling
