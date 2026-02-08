@@ -15,7 +15,7 @@ const TaskList= ({ todos, setTodos, filter, setFilter }) => {
       });
       
       if (res.ok) {
-        const updatedTodos = todos.filter(todo => todo.id !== id);
+        const updatedTodos = todos.filter(todo => todo._id !== id);
         setTodos(updatedTodos);
         console.log('Deleted!');        
       }
@@ -29,10 +29,10 @@ const TaskList= ({ todos, setTodos, filter, setFilter }) => {
 
   async function toggleComplete(todo) {
     try {
-      const id = todo.id
+      const id = todo._id
       const newStatus = !todo.completed;
 
-      const res = await fetch(`http://localhost:5000/api/todos/${todo.id}`, {
+      const res = await fetch(`http://localhost:5000/api/todos/${todo._id}`, {
         method: 'PUT',
         headers: {'Content-Type' : 'application/json',},
         body: JSON.stringify({completed:newStatus})
@@ -44,7 +44,7 @@ const TaskList= ({ todos, setTodos, filter, setFilter }) => {
 
         // Update the UI
 
-        setTodos(todos.map(todo => todo.id === id ? updatedTodo : todo))
+        setTodos(todos.map(todo => todo._id === id ? updatedTodo : todo))
       }
     } catch (error) {
       console.error('Error updating task: ', error)
@@ -71,7 +71,7 @@ const TaskList= ({ todos, setTodos, filter, setFilter }) => {
   }
 
   function startEdit(todo) {
-    setEditingId(todo.id);
+    setEditingId(todo._id);
     setEditText(todo.text);
   }
 
@@ -90,7 +90,7 @@ const TaskList= ({ todos, setTodos, filter, setFilter }) => {
         console.log(updatedTodo);
 
         // Update UI now
-        setTodos(todos.map(todo => todo.id === id ? updatedTodo : todo));
+        setTodos(todos.map(todo => todo._id === id ? updatedTodo : todo));
         setEditingId(null);
       }
     } catch (error) {
@@ -119,8 +119,8 @@ const TaskList= ({ todos, setTodos, filter, setFilter }) => {
       filter === "active" ? 
       !todo.completed : todo.completed).map(todo => 
         (
-        <div key={todo.id} className='flex flex-row justify-center items-center'>
-          <li className={`flex border-1 m-2 text-lg text-white w-[300px] h-auto py-2 px-4 rounded-lg break-words overflow-hidden ${todo.completed ? 'opacity-50' : ''} ${editingId === todo.id ? 'border-gray-300 bg-gray-600' : 'border-gray-600 bg-gray-700'}`}>
+        <div key={todo._id} className='flex flex-row justify-center items-center'>
+          <li className={`flex border-1 m-2 text-lg text-white w-[300px] h-auto py-2 px-4 rounded-lg break-words overflow-hidden ${todo.completed ? 'opacity-50' : ''} ${editingId === todo._id ? 'border-gray-300 bg-gray-600' : 'border-gray-600 bg-gray-700'}`}>
             <input
               type="checkbox"
               checked = {todo.completed} 
@@ -131,24 +131,24 @@ const TaskList= ({ todos, setTodos, filter, setFilter }) => {
               <textarea 
               autoFocus
                 className='break-all w-48 bg-transparent resize-none overflow-hidden'
-                disabled={editingId !== todo.id}
+                disabled={editingId !== todo._id}
                 onChange={(e) => {
                   setEditText(e.target.value);
                   autoResize(e);
                 }}
                 onInput={autoResize}
-                value={editingId === todo.id ? editText : todo.text}
+                value={editingId === todo._id ? editText : todo.text}
                 rows={1}
                 ref={(el) => { if (el) { el.style.height = 'auto'; el.style.height = el.scrollHeight + 'px'; }}}
               />
               <button 
-              onClick={() => editingId === todo.id ? saveEdit(todo.id, editText) : startEdit(todo)}
-              className='opacity-50 ml-4 hover:cursor-pointer'>{editingId === todo.id ? 'Save' : 'Edit'}</button>
+              onClick={() => editingId === todo._id ? saveEdit(todo._id, editText) : startEdit(todo)}
+              className='opacity-50 ml-4 hover:cursor-pointer'>{editingId === todo._id ? 'Save' : 'Edit'}</button>
             </div>
           </li>
           <button 
           onClick = {() => 
-            deleteTask(todo.id)
+            deleteTask(todo._id)
           }
           className='bg-blue-600 px-4 py-2 w-auto h-auto rounded-lg text-center font-bold text-white text-lg cursor-pointer border-1 border-blue-500'><FontAwesomeIcon icon={faTrash} /></button>
         </div>  
